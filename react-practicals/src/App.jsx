@@ -9,6 +9,8 @@ import TimeCounter from './components/TimeCounter'
 // import List from './components/List'
 import ListWithClickEvent from './components/ListWithClickEvent'
 import TrackApplicationRendering from './components/TrackApplicationRendering'
+import FocusInput from './components/FocusInput'
+import TrackPreviousState from './components/TrackPreviousState'
 
 function App() {
 
@@ -22,8 +24,11 @@ function App() {
         <ShowLoadingState/>
         <List/> */}
 
-        <ListWithClickEvent/>
-        <TrackApplicationRendering/>
+        {/* <ListWithClickEvent/>
+        <TrackApplicationRendering/> */}
+
+        {/* <FocusInput/> */}
+        <TrackPreviousState/>
       </div>
     </>
   )
