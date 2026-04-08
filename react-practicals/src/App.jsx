@@ -11,6 +11,7 @@ import ListWithClickEvent from './components/ListWithClickEvent'
 import TrackApplicationRendering from './components/TrackApplicationRendering'
 import FocusInput from './components/FocusInput'
 import TrackPreviousState from './components/TrackPreviousState'
+import MyForm from './components/MyForm'
 
 function App() {
 
@@ -28,7 +29,8 @@ function App() {
         <TrackApplicationRendering/> */}
 
         {/* <FocusInput/> */}
-        <TrackPreviousState/>
+        {/* <TrackPreviousState/> */}
+        <MyForm/>
       </div>
     </>
   )
