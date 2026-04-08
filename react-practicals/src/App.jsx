@@ -8,6 +8,7 @@ import TimeCounter from './components/TimeCounter'
 // import ShowLoadingState from './components/ShowLoadingState'
 // import List from './components/List'
 import ListWithClickEvent from './components/ListWithClickEvent'
+import TrackApplicationRendering from './components/TrackApplicationRendering'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <List/> */}
 
         <ListWithClickEvent/>
+        <TrackApplicationRendering/>
       </div>
     </>
   )
