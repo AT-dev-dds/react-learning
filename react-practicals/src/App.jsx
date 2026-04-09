@@ -13,6 +13,8 @@ import FocusInput from './components/FocusInput'
 import TrackPreviousState from './components/TrackPreviousState'
 import MyForm from './components/MyForm'
 import AppendTextOnClick from './components/AppendTextOnClick'
+import UseReducerCounter from './components/UseReducerCounter'
+import ToggleMode from './components/ToggleMode'
 
 function App() {
 
@@ -32,7 +34,9 @@ function App() {
         {/* <FocusInput/> */}
         {/* <TrackPreviousState/> */}
         {/* <MyForm/> */}
-        <AppendTextOnClick/>
+        {/* <AppendTextOnClick/> */}
+        {/* <UseReducerCounter/> */}
+        <ToggleMode/>
       </div>
     </>
   )
