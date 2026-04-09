@@ -12,6 +12,7 @@ import TrackApplicationRendering from './components/TrackApplicationRendering'
 import FocusInput from './components/FocusInput'
 import TrackPreviousState from './components/TrackPreviousState'
 import MyForm from './components/MyForm'
+import AppendTextOnClick from './components/AppendTextOnClick'
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
     <>
       <div>
         <h1>React Learning</h1>
-        <TimeCounter/>
+        {/* <TimeCounter/> */}
         {/* <DisplayUserProfile/>
         <ShowLoadingState/>
         <List/> */}
@@ -30,7 +31,8 @@ function App() {
 
         {/* <FocusInput/> */}
         {/* <TrackPreviousState/> */}
-        <MyForm/>
+        {/* <MyForm/> */}
+        <AppendTextOnClick/>
       </div>
     </>
   )
