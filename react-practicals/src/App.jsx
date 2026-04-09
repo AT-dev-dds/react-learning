@@ -15,6 +15,8 @@ import MyForm from './components/MyForm'
 import AppendTextOnClick from './components/AppendTextOnClick'
 import UseReducerCounter from './components/UseReducerCounter'
 import ToggleMode from './components/ToggleMode'
+import {UserProvider} from './components/User-Login-Display/UseContext'
+import Dashboard from './components/User-Login-Display/Dashboard'
 
 function App() {
 
@@ -36,7 +38,11 @@ function App() {
         {/* <MyForm/> */}
         {/* <AppendTextOnClick/> */}
         {/* <UseReducerCounter/> */}
-        <ToggleMode/>
+        {/* <ToggleMode/> */}
+      <UserProvider>
+        <Dashboard />
+      </UserProvider>
+       
       </div>
     </>
   )
