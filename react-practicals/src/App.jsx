@@ -17,6 +17,8 @@ import UseReducerCounter from './components/UseReducerCounter'
 import ToggleMode from './components/ToggleMode'
 import {UserProvider} from './components/User-Login-Display/UseContext'
 import Dashboard from './components/User-Login-Display/Dashboard'
+import { UserGreetings } from './components/User-Greeting-System/UserContext'
+import Home from './components/User-Greeting-System/Home'
 
 function App() {
 
@@ -39,10 +41,14 @@ function App() {
         {/* <AppendTextOnClick/> */}
         {/* <UseReducerCounter/> */}
         {/* <ToggleMode/> */}
-      <UserProvider>
+      {/* <UserProvider>
         <Dashboard />
       </UserProvider>
-       
+        */}
+
+        <UserGreetings>
+          <Home/>
+        </UserGreetings>
       </div>
     </>
   )
