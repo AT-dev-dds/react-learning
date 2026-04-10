@@ -1,0 +1,31 @@
+import { useState } from 'react'
+import {BrowserRouter,Routes,Route} from 'react-router'
+import './App.css'
+import Navbar from './components/Navbar'
+import Home from './components/Home'
+import Login from './components/Login'
+import Products from './components/Products'
+import Cart from './components/Cart'
+import CartContext from './context/CartContext'
+
+function App() {
+
+
+  return (
+    <>
+   <CartContext>
+    <BrowserRouter>
+   <Routes>
+    <Route path='/' element={<Navbar/>}/>
+    <Route path='/home' element={<Home/>}/>
+    <Route path='/login' element={<Login/>}/>
+    <Route path='/products' element={<Products/>}/>
+    <Route path='/cart' element={<Cart/>}/>
+   </Routes>
+   </BrowserRouter>
+   </CartContext>
+    </>
+  )
+}
+
+export default App
