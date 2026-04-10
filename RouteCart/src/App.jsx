@@ -7,6 +7,7 @@ import Login from './components/Login'
 import Products from './components/Products'
 import Cart from './components/Cart'
 import CartContext from './context/CartContext'
+import Layout from './components/Layout'
 
 function App() {
 
@@ -16,11 +17,13 @@ function App() {
    <CartContext>
     <BrowserRouter>
    <Routes>
-    <Route path='/' element={<Navbar/>}/>
+    <Route path='/' element={<Layout/>}> 
     <Route path='/home' element={<Home/>}/>
     <Route path='/login' element={<Login/>}/>
     <Route path='/products' element={<Products/>}/>
     <Route path='/cart' element={<Cart/>}/>
+    </Route>
+    
    </Routes>
    </BrowserRouter>
    </CartContext>

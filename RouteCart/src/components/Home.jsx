@@ -3,8 +3,6 @@ import React from 'react'
 export default function Home() {
   return (
    <>
-   
-   <>
   <meta charSet="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="" />
@@ -20,7 +18,7 @@ export default function Home() {
   />
   {/* Bootstrap core CSS */}
   <link
-    href="/docs/5.0/dist/css/bootstrap.min.css"
+   
     rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
     crossOrigin="anonymous"
@@ -99,6 +97,6 @@ Since our founding in [2025], we have been dedicated to providing high-quality s
 
    
    
-   </>
+   
   )
 }
