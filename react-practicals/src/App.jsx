@@ -19,6 +19,7 @@ import {UserProvider} from './components/User-Login-Display/UseContext'
 import Dashboard from './components/User-Login-Display/Dashboard'
 import { UserGreetings } from './components/User-Greeting-System/UserContext'
 import Home from './components/User-Greeting-System/Home'
+import ExpensiveCalculation from './components/ExpensiveCalculation'
 
 function App() {
 
@@ -46,9 +47,11 @@ function App() {
       </UserProvider>
         */}
 
-        <UserGreetings>
+        {/* <UserGreetings>
           <Home/>
-        </UserGreetings>
+        </UserGreetings> */}
+
+        <ExpensiveCalculation/>
       </div>
     </>
   )
