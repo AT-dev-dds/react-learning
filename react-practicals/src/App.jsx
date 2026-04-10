@@ -20,6 +20,7 @@ import Dashboard from './components/User-Login-Display/Dashboard'
 import { UserGreetings } from './components/User-Greeting-System/UserContext'
 import Home from './components/User-Greeting-System/Home'
 import ExpensiveCalculation from './components/ExpensiveCalculation'
+import UseCallbackExample from './components/UseCallbackExample'
 
 function App() {
 
@@ -51,7 +52,8 @@ function App() {
           <Home/>
         </UserGreetings> */}
 
-        <ExpensiveCalculation/>
+        {/* <ExpensiveCalculation/> */}
+        <UseCallbackExample/>
       </div>
     </>
   )
