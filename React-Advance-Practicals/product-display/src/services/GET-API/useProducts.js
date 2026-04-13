@@ -12,7 +12,9 @@ export default function useProducts(search) {
     useEffect(()=>{
 
       const controller=new AbortController();
-    const fetchProducts=async()=>{
+      
+      const timer=setTimeout(() => {
+        const fetchProducts=async()=>{
        try{
         const res=await axios.get(`https://dummyjson.com/products/search?q=${search}`,
           {
@@ -31,9 +33,11 @@ export default function useProducts(search) {
        }
     };
     fetchProducts();
+      }, 500);
     
     return ()=>{
       controller.abort();
+      clearTimeout(timer);
     }
 
     },[search])
