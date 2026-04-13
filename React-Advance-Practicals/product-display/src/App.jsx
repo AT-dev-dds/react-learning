@@ -1,14 +1,15 @@
 import { useState } from 'react'
 
 import './App.css'
-import ProductDisplay from './components/ProductDisplay'
+import GetProductsByTitle from './components/GetProductsByTitle.jsx'
 
 function App() {
 
 
   return (
     <>
-     <ProductDisplay/>
+     {/* <ProductDisplay/> */}
+    <GetProductsByTitle/>
     </>
   )
 }

@@ -33,26 +33,26 @@ import axios from 'axios'
 
     
 
- export default  function FetchApi(){
-       const[data,setData]=useState([]);
-    const[loading,setLoading]=useState(true);
-    const[error,setError]=useState(null);
+//  export default  function FetchApi(){
+//     const[data,setData]=useState([]);
+//     const[loading,setLoading]=useState(true);
+//     const[error,setError]=useState(null);
    
-    useEffect(()=>{
-         async function fetchData(){
-      try{
-       const res= await axios("https://dummyjson.com/products");
-       const result=res.data;
-       setData(result.products);
-       }catch(err){
-       setError(err.message)
-       }
-       finally{
-        setLoading(false);
-       }
-         }
-         fetchData();
-    },[]);
+//     useEffect(()=>{
+//          async function fetchData(){
+//       try{
+//        const res= await axios("https://dummyjson.com/products");
+//        const result=res.data;
+//        setData(result.products);
+//        }catch(err){
+//        setError(err.message)
+//        }
+//        finally{
+//         setLoading(false);
+//        }
+//          }
+//          fetchData();
+//     },[]);
     
-   return {data,loading,error}
- }
+//    return {data,loading,error}
+//  }
