@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import useProducts from '../services/GET-API/useProducts.js'
+import useProducts from '../hooks/GET-API/useProducts.js'
 export default function GetProductsByTitle() {
 
   const [search,setSearch]=useState("");
