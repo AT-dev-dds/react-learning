@@ -5,7 +5,7 @@ export default function useFindUser(username) {
 
     const [user,setUser]=useState([]);
     const [error,setError]=useState(null);
-    const [isLoading,setIsLoading]=useState(false);
+    const [isLoading,setIsLoading]=useState(true);
 
  useEffect(()=>{
 
@@ -26,6 +26,7 @@ export default function useFindUser(username) {
             setIsLoading(false);
             return;
         }
+        setIsLoading(true);
 
          const res= await axios.get(`https://fakestoreapi.com/users?search=${username}`,{
             signal:controller.signal

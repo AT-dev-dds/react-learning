@@ -24,14 +24,16 @@ const debounced=useDebounce(username,500)
    <h1> Users Profile:</h1>
 <input type="text" value={username} placeholder='Search User' onChange={(e)=>setUsername(e.target.value)} />
 
-   {
+  {
+    isLoading?<h1>Loading...</h1>:  
     user.map((u)=><div key={u.id}>
 
    <h4>UserName: {u.username}</h4>
    <p>Email: {u.email}</p>
    <p>Phone Number: {u.phone}</p>
     </div>)
-   }
+   
+  }
    </>
   )
 }
