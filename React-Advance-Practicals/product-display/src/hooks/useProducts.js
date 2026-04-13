@@ -13,7 +13,6 @@ export default function useProducts(search) {
 
       const controller=new AbortController();
       
-      const timer=setTimeout(() => {
         const fetchProducts=async()=>{
        try{
         const res=await axios.get(`https://dummyjson.com/products/search?q=${search}`,
@@ -33,11 +32,11 @@ export default function useProducts(search) {
        }
     };
     fetchProducts();
-      }, 500);
+    
     
     return ()=>{
       controller.abort();
-      clearTimeout(timer);
+      
     }
 
     },[search])

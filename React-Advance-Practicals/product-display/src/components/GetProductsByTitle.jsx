@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import useProducts from '../hooks/GET-API/useProducts.js'
+import useProducts from '../hooks/useProducts.js'
+import useDebouncing from '../hooks/useDebouncing.js';
 export default function GetProductsByTitle() {
 
   const [search,setSearch]=useState("");
 
-  const {products,error,isLoading}=useProducts(search);
+  const debouncing=useDebouncing(search,500);
+
+  const {products,error,isLoading}=useProducts(debouncing);
 
   if(isLoading) return <h1>Loading....</h1>;
   if(error) return <h3>{error.message}</h3>;
