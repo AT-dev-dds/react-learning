@@ -13,9 +13,7 @@ export default function Login() {
        
     } = useForm();
 
-   
 
-  
 
     const onSubmit=(data)=>{
         console.log(data);
@@ -53,10 +51,10 @@ export default function Login() {
     }
 
     {
-        errors.password?.type==="minLength" && <h1 style={{color:"red"}}>Password should be atleast 6</h1>
+        errors.password?.type==="minLength" && <h1 style={{color:"red"}}>Password should be atleast 6 character</h1>
     }
      {
-        errors.password?.type==="maxLength" &&<h1 style={{color:"darkblue"}}>Password should be at atmost 12</h1>
+        errors.password?.type==="maxLength" &&<h1 style={{color:"darkblue"}}>Password should be at most 12 character </h1>
     }
 </div>
 
