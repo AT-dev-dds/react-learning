@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import {useForm} from 'react-hook-form'
+import loginUser  from '../services/authServices.js'
 
 export default function Login() {
+
+    const[error,setError]=useState(null);
+    const[isLoading,setIsLoading]=useState(false);
 
     const {
         register,
@@ -13,17 +17,47 @@ export default function Login() {
        
     } = useForm();
 
+    
 
+    
 
-    const onSubmit=(data)=>{
-        console.log(data);
+    const onSubmit=async(formData)=>{
+        
+      setIsLoading(true);
+      setError(null);
+
+      try{
+        const result= await loginUser(formData);
+        // console.log(result);
+      
+
+        localStorage.setItem("token",result.accessToken);
+
+            console.log(localStorage.getItem("token"));
+      }catch(err){
+        setError(err.message);
+      }
+      finally{
+        setIsLoading(false);
+      }
+       
 
    reset({
-     email:"",
+     username:"",
     password:""
     })
     }
 
+
+    {
+        error && <p style={{color:"red"}}>{error.message}</p>
+    }
+    {
+        isLoading && <p style={{color:"darkpink"}} >loading....</p>
+    }
+
+  
+    
   return (
  <>
 
@@ -31,11 +65,11 @@ export default function Login() {
 
 
 <div className="mb-3">
-    <Input label="email" type="email" name="email" {...register("email",{required:true})} />
+    <Input label="username" type="username" name="username" {...register("username",{required:true})} />
 </div>
 
 {
-  errors.email && <p style={{color:"red"}}>Email is required!</p>
+  errors.username && <p style={{color:"red"}}>username is required!</p>
 }
 
 <div className="mb-3">
