@@ -11,6 +11,6 @@ export default async function loginUser(formData){
 
     return res.data;
   }catch(err){
-        console.log(err.message)
+        console.log(err.message);
   }
 }
