@@ -1,13 +1,25 @@
+import axios from "axios"
 
 
-export default function authServices() {
+export default async function authServices(formData) {
 
 try{
 
-}catch(){
+ const res= await axios.post("https://dummyjson.com/auth/login",{
+username: formData.username,
+password: formData.password,
+expiresInMins:30
+ });
 
-}finally{
-    
+ return res.data;
+}catch(err){
+console.log(err.response?.data);
+throw err;
 }
-  return (<></>)
+  
 }
+
+
+
+// username: emilys
+// password: emilyspass

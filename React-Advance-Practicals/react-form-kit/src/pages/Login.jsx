@@ -20,7 +20,7 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (formData) => {
     setIsLoading(true);
     setError(null);
 

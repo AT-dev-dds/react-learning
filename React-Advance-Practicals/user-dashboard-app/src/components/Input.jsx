@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
-export default function Input({children,...props}) {
+const Input = forwardRef(({children,...props}, ref) => {
   return (
    <>
    <div className='mb-3'>
@@ -8,9 +8,11 @@ export default function Input({children,...props}) {
    </div>
    
   <div className='mb-3'>
-    <input {...props} />
+    <input {...props} ref={ref} />
   </div>
 
    </>
   )
-}
+})
+
+export default Input;
