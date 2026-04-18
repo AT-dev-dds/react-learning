@@ -34,14 +34,17 @@ const onSubmit=async(formData)=>{
 return(
   <>
   
-<form onClick={handleSubmit(onSubmit)}>
+<form onSubmit={handleSubmit(onSubmit)}>
 
-  <input type="text" placeholder='Enter username' {...register("username",{required:true})} />
+  <div>
+    <input type="text" placeholder='Enter username' {...register("username",{required:true})} />
   {
     errors.username && <p style={{color:"red"}}>Username is required!</p>
   }
+  </div>
 
-  <input type="text" placeholder='Enter password' {...register("password",{
+ <div>
+   <input type="text" placeholder='Enter password' {...register("password",{
     required:true,
     validate:{
         minCount:(value)=>value.length>=6,
@@ -54,14 +57,17 @@ return(
   }
 
   {
-    errors.password?.type==="minLength" && <p style={{color:"darkgrey"}} > Password length must be of 6 characters</p>
+    errors.password?.type==="minCount" && <p style={{color:"darkgrey"}} > Password length must be of 6 characters</p>
     
   }
   {
-    errors.password?.type==="maxLength" && <p style={{color:"darkgrey"}} >Password length should not be more than 12 </p>
+    errors.password?.type==="maxCount" && <p style={{color:"darkgrey"}} >Password length should not be more than 12 </p>
   }
+ </div>
 
-  <button type="submit">Submit</button>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
   
   
 </form>
