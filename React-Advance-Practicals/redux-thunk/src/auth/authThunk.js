@@ -3,13 +3,13 @@ import {loginUser} from './authService.js'
 
 export const login= createAsyncThunk(
     "auth/login",
-    async(data)=>{
+    async(data,thunkAPI)=>{
      try{
       const res= await loginUser(data,thunkAPI);
       return res;
      }catch(err){
       return thunkAPI.rejectWithValue(
-        err.res?.data?.message || "Login Failed"
+        err.response?.data?.message || "Login Failed"
       )
      }
     }
