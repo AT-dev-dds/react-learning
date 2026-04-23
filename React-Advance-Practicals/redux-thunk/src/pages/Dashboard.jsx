@@ -1,18 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import {getUser} from '../auth/authService.js'
 
-export default async function Dashboard() {
+export default function Dashboard() {
 
-    const token=localStorage.getItem("token");
+    const [user,setUser]=useState(null);
 
-    const users=await getUser(token);
+    useEffect(()=>{
+        const fetchUser=async()=>{
+            const token=localStorage.getItem("token");
+            console.log("TOKEN:", token);
+            const users=await getUser(token);
+            setUser(users);
+        };
+
+        fetchUser();
+    },[])
+
   return (
-  <>
+   <>
    {
-    users.map((user)=><div key={user.id}>
-        <h2>{user.username}</h2>
-    </div>)
+    user?<div><h3>{user.username}</h3></div>:<p>Loading...</p>
    }
-  </>
+   </>
   )
 }

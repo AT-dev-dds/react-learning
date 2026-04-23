@@ -1,45 +1,51 @@
-import React,{useEffect} from 'react'
-import {useForm} from 'react-hook-form'
-import {useSelector,useDispatch} from 'react-redux'
-import {login} from '../auth/authThunk.js'
-import {useNavigate} from 'react-router'
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useSelector, useDispatch } from "react-redux";
+import { login } from "../auth/authThunk.js";
+import { useNavigate } from "react-router";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-    const  dispatch=useDispatch();
-    const navigate=useNavigate();
+  const { register, handleSubmit } = useForm();
 
-    const {
-        register,
-        handleSubmit,
-    }=useForm();
+  const { user, isLoading, isError, message } = useSelector(
+    (state) => state.auth,
+  );
 
-    const {user}= useSelector(
-        (state)=>state.auth
-    );
+  const onSubmit = (data) => {
+    console.log("FORM DATA:", data);
+    dispatch(login(data));
+  };
 
-    const onSubmit=(formData)=>{
-       dispatch(login(formData))
+  useEffect(() => {
+    console.log("USER STATE:", user);
+    if (user) {
+      navigate("/dashboard");
     }
-     
-  useEffect(()=>{
-      if(user){
-      navigate("/dashboard")
-    }
-  },[user])
+  }, [user]);
 
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {isLoading && <p>Loading...</p>}
+        {isError && <p>{message}</p>}
 
-<input type="text" placeholder='Enter Username' {...register("username")} />
+        <input
+          type="text"
+          placeholder="Enter Username"
+          {...register("username")}
+        />
 
-    <input type="text" placeholder='Enter Password' {...register("password")} />
+        <input
+          type="password"
+          placeholder="Enter Password"
+          {...register("password")}
+        />
 
-    <button type='submit' >Login</button>
-
-
-    </form>
+        <button type="submit">Login</button>
+      </form>
     </>
-  )
+  );
 }

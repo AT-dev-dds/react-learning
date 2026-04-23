@@ -21,9 +21,11 @@ const initialState={
         state.isLoading=true;
      })
      .addCase(login.fulfilled,(state,action)=>{
+ 
         state.isLoading=false,
-        state.user=action.payload.user,
-        state.token=action.payload.token
+        state.user=action.payload,
+        state.token=action.payload.accessToken,
+        localStorage.setItem("token",action.payload.accessToken) 
      })
      .addCase(login.rejected,(state,action)=>{
         state.isLoading=false,
