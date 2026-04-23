@@ -15,12 +15,12 @@ export default function Login() {
   );
 
   const onSubmit = (data) => {
-    console.log("FORM DATA:", data);
+    
     dispatch(login(data));
   };
 
   useEffect(() => {
-    console.log("USER STATE:", user);
+ 
     if (user) {
       navigate("/dashboard");
     }
