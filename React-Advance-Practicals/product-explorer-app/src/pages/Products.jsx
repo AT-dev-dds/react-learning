@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import {useSelector,useDispatch} from 'react-redux'
-import {deleteItem, getProducts, getProductsById} from '../features/products/productThunk.js'
+import {resetState} from '../features/products/productSlices.js'
+import { getProducts, getProductsById} from '../features/products/productThunk.js'
 import {Link} from 'react-router'
 
 
@@ -9,7 +10,7 @@ export default function Products() {
 
     const dispatch=useDispatch();
     
-    const {products,isLoading,singleProduct}=useSelector((state)=>state.product);
+    const {products,isLoading,singleProduct,messages}=useSelector((state)=>state.product);
 
    useEffect(()=>{
     
@@ -18,9 +19,12 @@ export default function Products() {
     }
 
     dispatch(getProductsById(5));
-
+       
+    return ()=>{
+      dispatch(resetState());
+    }
   
-   },[]);
+   },[dispatch,products.length]);
 
    if(isLoading){
    return <h2>Loading....</h2>
@@ -28,6 +32,9 @@ export default function Products() {
 
   return (
   <>
+  {
+    messages && <h3>{messages}</h3>
+  }
   {
     products.map((product)=><div key={product.id}>
         <h1>{product.title}</h1>
