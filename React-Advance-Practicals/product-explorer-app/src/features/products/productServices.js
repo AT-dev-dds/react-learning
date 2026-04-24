@@ -25,8 +25,14 @@ export const addProduct=async(data)=>{
 
 
 
-export const updateProduct=async(data)=>{
+export const updateProduct=async({data,id})=>{
 
    const res=await axios.put(`https://dummyjson.com/products/${id}`,data);
+   return res.data;
+}
+
+
+export const deleteProduct=async(id)=>{
+   const res=await axios.delete(`https://dummyjson.com/products/${id}`);
    return res;
 }

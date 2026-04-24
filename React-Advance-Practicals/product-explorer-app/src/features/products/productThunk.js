@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit'
-import {addProduct, fetchProduct, fetchProductById, updateProduct} from './productServices.js'
+import {addProduct, fetchProduct, fetchProductById, updateProduct,deleteProduct} from './productServices.js'
 
 
 export const getProducts= createAsyncThunk(
@@ -58,13 +58,28 @@ export const addItem=createAsyncThunk(
 
 export const  updateItem=createAsyncThunk(
     "products/update",
-    async(data,thunkAPI)=>{
+    async({id,data},thunkAPI)=>{
        try{
-        const res= await updateProduct(data);
-        return res.data;
+        const res= await updateProduct({id,data});
+        return res;
        }catch(err){
       console.log(err.message);
-      thunkAPI.rejectWithValue("Failed to update product");
+      return thunkAPI.rejectWithValue("Failed to update product");
        }
+    }
+)
+
+
+
+export const deleteItem= createAsyncThunk(
+    "/products/delete",
+    async(id,thunkAPI)=>{
+        try{
+            const res= deleteProduct(id);
+            return res;
+        }catch(err){
+            console.log(err.message);
+            return thunkAPI.rejectWithValue("Failed to delete products!");
+        }
     }
 )
