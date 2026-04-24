@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {getProducts, getProductsById} from '../features/products/productThunk.js'
+import {Link} from 'react-router'
 
 
 export default function Products() {
@@ -36,6 +37,10 @@ export default function Products() {
         <p>{singleProduct.id}</p>
     </div>)
   }
+
+
+<Link to={"/addProduct"}>Add product</Link>
+
   </>
   )
 }

@@ -1,6 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { getProducts } from './productThunk'
+import { addItem, getProducts } from './productThunk'
 import {getProductsById} from './productThunk'
+
 
 
 const initialState={
@@ -41,6 +42,17 @@ const initialState={
         .addCase(getProductsById.rejected,(state)=>{
             state.isLoading=false;
             state.isError=true
+        })
+        .addCase(addItem.pending,(state)=>{
+            state.isLoading=true;
+        })
+        .addCase(addItem.fulfilled,(state,action)=>{
+            state.isLoading=false;
+            state.products.push(action.payload);
+        })
+        .addCase(addItem.rejected,(state)=>{
+            state.isLoading=false;
+            state.isError=true;
         })
     }
     })

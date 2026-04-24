@@ -17,3 +17,8 @@ export const fetchProductById=async(id)=>{
 
     return res;
 }
+
+export const addProduct=async(data)=>{
+   const res= await axios.post("https://dummyjson.com/products/add",data);
+   return res.data;
+}
