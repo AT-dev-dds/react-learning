@@ -17,7 +17,7 @@ export default function DeleteProduct() {
       await dispatch(deleteItem(Number(id)));
       navigate("/");
     } catch (err) {
-      console.log("Delete failed:", err);
+      console.log("Delete failed:", err.message);
     }
   };
 

@@ -10,30 +10,39 @@ export default function Products() {
 
     const dispatch=useDispatch();
     
-    const {products,isLoading,singleProduct,messages}=useSelector((state)=>state.product);
+    const {products,isLoading,singleProduct,messages,isError}=useSelector((state)=>state.product);
 
-   useEffect(()=>{
-    
-    if(products.length===0){
-          dispatch(getProducts());
-    }
+useEffect(() => {
+  if (products.length === 0) {
+    dispatch(getProducts());
+  }
 
-    dispatch(getProductsById(5));
-       
-    return ()=>{
+  dispatch(getProductsById(5));
+}, [dispatch, products.length]);
+
+
+useEffect(() => {
+  if (isError || messages) {
+    const timer = setTimeout(() => {
       dispatch(resetState());
-    }
-  
-   },[dispatch,products.length]);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }
+}, [isError, messages, dispatch]);
 
    if(isLoading){
    return <h2>Loading....</h2>
    }
 
+   if(isError){
+    return <h2 style={{color:"red"}}>{{messages} ||"Something went wrong!"} </h2>
+   }
+
   return (
   <>
   {
-    messages && <h3>{messages}</h3>
+    messages && !isError && <h3 style={{color:"green"}} >{messages}</h3>
   }
   {
     products.map((product)=><div key={product.id}>
