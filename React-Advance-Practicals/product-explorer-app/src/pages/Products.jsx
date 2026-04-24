@@ -40,6 +40,8 @@ export default function Products() {
 
 
 <Link to={"/addProduct"}>Add product</Link>
+<Link to={"/updateProduct"}>update product</Link>
+
 
   </>
   )

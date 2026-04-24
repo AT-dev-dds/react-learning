@@ -1,5 +1,5 @@
 import {createSlice} from '@reduxjs/toolkit'
-import { addItem, getProducts } from './productThunk'
+import { addItem, getProducts, updateItem } from './productThunk'
 import {getProductsById} from './productThunk'
 
 
@@ -51,6 +51,21 @@ const initialState={
             state.products.push(action.payload);
         })
         .addCase(addItem.rejected,(state)=>{
+            state.isLoading=false;
+            state.isError=true;
+        })
+        .addCase(updateItem.pending,(state)=>{
+            state.isLoading=true;
+        })
+        .addCase(updateItem.fulfilled,(state,action)=>{
+            state.isLoading=false;
+            state.products=  state.products.map((product)=>{
+                product.id === action.payload.id ?
+                action.payload:
+                product
+            })
+        })
+        .addCase(updateItem.rejected,(state)=>{
             state.isLoading=false;
             state.isError=true;
         })
