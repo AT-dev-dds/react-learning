@@ -12,7 +12,10 @@ export default function Products() {
     const {products,isLoading,singleProduct}=useSelector((state)=>state.product);
 
    useEffect(()=>{
-    dispatch(getProducts());
+    
+    if(products.length===0){
+          dispatch(getProducts());
+    }
 
     dispatch(getProductsById(5));
 

@@ -72,10 +72,10 @@ export const  updateItem=createAsyncThunk(
 
 
 export const deleteItem= createAsyncThunk(
-    "/products/delete",
+    "products/delete",
     async(id,thunkAPI)=>{
         try{
-            const res= deleteProduct(id);
+            const res=await deleteProduct(id);
             return res;
         }catch(err){
             console.log(err.message);

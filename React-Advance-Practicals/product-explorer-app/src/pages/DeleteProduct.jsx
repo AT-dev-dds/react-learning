@@ -11,10 +11,20 @@ export default function DeleteProduct() {
 
     const navigate= useNavigate();
 
-    useEffect(()=>{
-        dispatch(deleteItem(id));
-        navigate("/");
-    },[])
+    useEffect(() => {
+  const handleDelete = async () => {
+    try {
+      await dispatch(deleteItem(Number(id)));
+      navigate("/");
+    } catch (err) {
+      console.log("Delete failed:", err);
+    }
+  };
+
+  handleDelete();
+}, [id]);
+ 
+    
   return (
    <>
    

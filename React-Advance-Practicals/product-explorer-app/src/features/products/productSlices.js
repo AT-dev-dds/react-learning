@@ -29,7 +29,7 @@ const initialState={
         })
         .addCase(getProducts.rejected,(state)=>{
             state.isLoading=false,
-            state,isError=true;
+            state.isError=true;
         })
         .addCase(getProductsById.pending,(state)=>{
             state.isLoading=true;
@@ -73,8 +73,11 @@ const initialState={
         })
         .addCase(deleteItem.fulfilled,(state,action)=>{
             state.isLoading=false;
+            const deleteId=Number(action.meta.arg);
+            
+            state.products= state.products.filter((product)=>product.id!==deleteId);
 
-            state.products= state.products.filter((product)=>product.id!==action.payload.id);
+
         })
         .addCase(deleteItem.rejected,(state)=>{
             state.isLoading=false;

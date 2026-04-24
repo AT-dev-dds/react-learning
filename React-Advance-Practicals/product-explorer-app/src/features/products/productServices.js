@@ -34,5 +34,5 @@ export const updateProduct=async({data,id})=>{
 
 export const deleteProduct=async(id)=>{
    const res=await axios.delete(`https://dummyjson.com/products/${id}`);
-   return res;
+   return res.data;
 }
