@@ -1,7 +1,7 @@
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProduct } from "../services/productServices.js";
-import { useState } from "react";
+import { useState } from "react"; 
 
 export default function UpdateProduct({ id }) {
   const queryClient = useQueryClient();
@@ -44,7 +44,7 @@ export default function UpdateProduct({ id }) {
     },
 
     onError: (error) => {
-      console.log("Updation Error", error);
+      console.log("Updation Error", error);                                                                                                                  
     },
   });
 
