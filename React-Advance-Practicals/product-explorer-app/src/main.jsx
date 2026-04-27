@@ -3,9 +3,14 @@ import { Provider } from "react-redux";
 import "./index.css";
 import App from "./App.jsx";
 import { store } from "./app/store.js";
+import {QueryClientProvider,QueryClient} from '@tanstack/react-query'
+
+const queryClient=new QueryClient();
 
 createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
+   <QueryClientProvider client={queryClient} >
+      <Provider store={store}>
     <App />
-  </Provider>,
+  </Provider>
+   </QueryClientProvider>
 );
