@@ -25,8 +25,6 @@ export default function AddProducts() {
             ...formData,
             price:Number(formData.price)
         });
-
-        navigate("/");
       };
     
 
@@ -35,10 +33,11 @@ export default function AddProducts() {
     const mutation = useMutation({
         mutationFn:postProducts,
         onSuccess:(newProduct)=>{
-            queryClient.invalidateQueries(["products"],(oldData)=>{
-              if(!oldData) return newProduct;
+            queryClient.setQueryData(["products"],(oldData)=>{
+              if(!oldData) return [newProduct];
               return [...oldData,newProduct];
             });
+            navigate("/");
         },
         onError:(error)=>{
             console.log(error);
@@ -63,7 +62,7 @@ export default function AddProducts() {
           onChange={handleChange}
         />
 
-        <button type="submit">{ mutation.isLoading?"Adding...":"Loading...."}</button>
+        <button type="submit">{ mutation.isPending ? "Adding..." : "Add Product" }</button>
       </form>  
   </>
   )
