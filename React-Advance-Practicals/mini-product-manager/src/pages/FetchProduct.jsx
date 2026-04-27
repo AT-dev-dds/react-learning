@@ -3,9 +3,11 @@ import {useNavigate} from 'react-router'
 import {useQuery} from '@tanstack/react-query'
 import {getProducts} from '../services/productServices.js'
 import DeleteProduct from './DeleteProduct.jsx';
+import UpdateProduct from './UpdateProduct.jsx';
 
 export default function FetchProduct() {
 
+    
     const {data,isLoading,error,isError}=useQuery({
         queryKey:["products"],
         queryFn: getProducts,
@@ -27,6 +29,7 @@ export default function FetchProduct() {
             <p>{product.price}</p>
             
             <DeleteProduct id={product.id}/>
+            <UpdateProduct id={product.id} />
         </div>)
     }
 

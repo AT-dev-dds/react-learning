@@ -1,34 +1,34 @@
-import React from 'react'
-import {useMutation,useQueryClient} from '@tanstack/react-query'
-import {deleteProducts} from '../services/productServices.js'
+import React from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteProducts } from "../services/productServices.js";
 
-export default function DeleteProduct({id}) {
+export default function DeleteProduct({ id }) {
+  const queryClient = useQueryClient();
 
-     const queryClient=useQueryClient();
+  const mutation = useMutation({
+    mutationFn: deleteProducts,
 
-    const mutation = useMutation({
-        mutationFn:deleteProducts,
+    onSuccess: (_, deletedId) => {
+      queryClient.setQueryData(["products"], (oldData) => {
+        return oldData.filter((product) => product.id !== deletedId);
+      });
+    },
 
-        onSuccess:(_, deletedId)=>{
-          queryClient.setQueryData(["products"], (oldData)=>{
-            return oldData.filter((product)=>product.id!==deletedId);
-          })
-        },
-        
-        onError:(error)=>{
-            console.log("Delete Error:",error);
-        }
-    });
-
-  
-   
-    
+    onError: (error) => {
+      console.log("Delete Error:", error);
+    },
+  });
 
   return (
-  <>
-   <button onClick={()=>{
-    mutation.mutate(id)
-   }} >Delete</button>
-  </>
-  )
+    <>
+      <button
+        className="btn btn-danger text-white"
+        onClick={() => {
+          mutation.mutate(id);
+        }}
+      >
+        Delete
+      </button>
+    </>
+  );
 }
