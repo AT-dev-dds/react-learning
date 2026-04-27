@@ -2,6 +2,7 @@ import React from 'react'
 import {useNavigate} from 'react-router'
 import {useQuery} from '@tanstack/react-query'
 import {getProducts} from '../services/productServices.js'
+import DeleteProduct from './DeleteProduct.jsx';
 
 export default function FetchProduct() {
 
@@ -24,6 +25,8 @@ export default function FetchProduct() {
         data?.map((product)=><div key={product.id}>
             <h3>{product.title}</h3>
             <p>{product.price}</p>
+            
+            <DeleteProduct id={product.id}/>
         </div>)
     }
 
