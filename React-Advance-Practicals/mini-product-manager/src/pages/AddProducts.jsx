@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 
 
-export default function AddProducts() {
+export default function AddProducts({search}) {
 
     const [formData,setFormData]=useState({
         title:"",
@@ -33,7 +33,7 @@ export default function AddProducts() {
     const mutation = useMutation({
         mutationFn:postProducts,
         onSuccess:(newProduct)=>{
-            queryClient.setQueryData(["products"],(oldData)=>{
+            queryClient.setQueryData(["products",search],(oldData)=>{
               if(!oldData) return [newProduct];
               return [...oldData,newProduct];
             });

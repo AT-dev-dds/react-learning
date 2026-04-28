@@ -29,30 +29,32 @@ export default function UpdateProduct({ id,search }) {
     });
   };
 
+  
+
   const mutation = useMutation({
-    mutationFn: updateProduct,
+  mutationFn: updateProduct,
 
-    onSuccess: (newData, Variable) => {
-      const updatedId = Variable.id;
+  onSuccess: (newData, { id }) => {
+    queryClient.setQueryData(["products", search], (oldData) => {
+      if (!oldData?.products) return oldData;
 
-      queryClient.setQueryData(["products",search], (oldData) => {
+      const updatedProduct = oldData.products.map((product) =>
+        product.id === id ? newData : product
+      );
 
-        if(!oldData?.products) return oldData;
-        const updatedProduct= oldData.products.map((product) => {
-           product.id === updatedId ? newData : product;
-        });
-        return{
-          ...oldData,
-          products:updatedProduct
-        }
-      });
-      setShowForm(false);
-    },
+      return {
+        ...oldData,
+        products: updatedProduct,
+      };
+    });
 
-    onError: (error) => {
-      console.log("Updation Error", error);                                                                                                                  
-    },
-  });
+    setShowForm(false);
+  },
+
+  onError: (error) => {
+    console.log("Updation Error", error);
+  },
+});
 
   return (
     <>
