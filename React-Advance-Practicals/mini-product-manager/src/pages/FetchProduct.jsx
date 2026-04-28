@@ -9,6 +9,7 @@ export default function FetchProduct() {
 
   const [search,setSearch]=useState("");
   const [debouncedSearch,setDebouncedSearch]=useState("");
+  const [page,setPage]=useState(1);
 
 
   useEffect(()=>{
@@ -19,9 +20,15 @@ export default function FetchProduct() {
     return ()=> clearTimeout(timer);
   },[search])
     
-    const {data,isLoading,error,isError}=useQuery({
-        queryKey:["products",debouncedSearch],
-        queryFn:()=> getProducts({search: debouncedSearch}),
+
+  useEffect(()=>{
+    setPage(1);
+  },[debouncedSearch])
+
+
+    const {data,isLoading,isError}=useQuery({
+        queryKey:["products",debouncedSearch,page],
+        queryFn:()=> getProducts({search: debouncedSearch,page}),
         staleTime:5000,
         refetchOnWindowFocus:false
     });
@@ -43,6 +50,22 @@ export default function FetchProduct() {
       <input type="text" placeholder='search products' onChange={handleChange} value={search} />
     </div>
 
+<div style={{ marginTop: "20px" }}>
+  <button
+    onClick={() => setPage((p) => p - 1)}
+    disabled={page === 1}
+  >
+    Prev
+  </button>
+
+  <span style={{ margin: "0 10px" }}>
+    Page: {page}
+  </span>
+
+  <button onClick={() => setPage((p) => p + 1)}>
+    Next
+  </button>
+</div>
  
     
     {

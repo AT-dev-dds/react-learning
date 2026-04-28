@@ -3,11 +3,19 @@ import axios from 'axios'
 
 
 
-export const getProducts=async({search=""})=>{
+export const getProducts=async({search="",page=1})=>{
+
+    const limit=10;
+
+    const skip=(page-1)*10;
 
     let url="/products";
 
-    const params={};
+    const params={
+        limit,
+        skip,
+
+    };
 
     if(search){
         url="/products/search";
