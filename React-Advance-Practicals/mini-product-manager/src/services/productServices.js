@@ -30,7 +30,7 @@ export const postProducts=async(data)=>{
 
 
 
-export const deleteProducts=async({id})=>{
+export const deleteProducts=async(id)=>{
    const res= await axios.delete(`https://dummyjson.com/products/${id}`);
    return res.data;
 }

@@ -10,6 +10,7 @@ export default function FetchProduct() {
   const [search,setSearch]=useState("");
   const [debouncedSearch,setDebouncedSearch]=useState("");
 
+
   useEffect(()=>{
     const timer=setTimeout(()=>{
       setDebouncedSearch(search);
@@ -41,6 +42,8 @@ export default function FetchProduct() {
     <div>
       <input type="text" placeholder='search products' onChange={handleChange} value={search} />
     </div>
+
+ 
     
     {
         data?.products?.map((product)=><div key={product.id}>
