@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {useNavigate} from 'react-router'
 import {useQuery} from '@tanstack/react-query'
 import {getProducts} from '../services/productServices.js'
@@ -7,13 +7,19 @@ import UpdateProduct from './UpdateProduct.jsx';
 
 export default function FetchProduct() {
 
+  const [search,setSearch]=useState("");
+
     
     const {data,isLoading,error,isError}=useQuery({
-        queryKey:["products"],
-        queryFn: getProducts,
+        queryKey:["products",search],
+        queryFn:()=> getProducts({search}),
         staleTime:5000,
         refetchOnWindowFocus:false
     });
+
+    const handleChange=(e)=>{
+      setSearch(e.target.value);
+    }
 
     const navigate= useNavigate();
 
@@ -23,8 +29,13 @@ export default function FetchProduct() {
 
   return (
     <>
+
+    <div>
+      <input type="text" placeholder='search products' onChange={handleChange} value={search} />
+    </div>
+    
     {
-        data?.map((product)=><div key={product.id}>
+        data?.products?.map((product)=><div key={product.id}>
             <h3>{product.title}</h3>
             <p>{product.price}</p>
             
