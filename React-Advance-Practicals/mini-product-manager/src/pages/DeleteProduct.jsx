@@ -2,15 +2,22 @@ import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProducts } from "../services/productServices.js";
 
-export default function DeleteProduct(id) {
+export default function DeleteProduct({id,search}) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: deleteProducts,
 
-    onSuccess: (_, deletedId) => {
-      queryClient.setQueryData(["products"], (oldData) => {
-        return oldData.filter((product) => product.id !== deletedId);
+   onSuccess: (_, deletedId) => {
+      queryClient.setQueryData(["products", search], (oldData) => {
+        if (!oldData?.products) return oldData;
+
+        return {
+          ...oldData,
+          products: oldData.products.filter(
+            (product) => product.id !== deletedId
+          ),
+        };
       });
     },
 

@@ -47,8 +47,8 @@ export default function FetchProduct() {
             <h3>{product.title}</h3>
             <p>{product.price}</p>
             
-            <DeleteProduct id={product.id}/>
-            <UpdateProduct id={product.id} />
+            <DeleteProduct id={product.id} search={search}/>
+            <UpdateProduct id={product.id} search={search}/>
         </div>)
     }
 
