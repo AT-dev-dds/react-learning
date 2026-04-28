@@ -37,11 +37,15 @@ export default function FetchProduct() {
       setSearch(e.target.value);
     }
 
+    
+
     const navigate= useNavigate();
 
     if(isLoading) return <h4>Loading...</h4>
 
     if(isError) return <h5>Error in fetching products!</h5>
+
+    const totalPages= Math.ceil(data?.total/10);
 
   return (
     <>
@@ -62,7 +66,9 @@ export default function FetchProduct() {
     Page: {page}
   </span>
 
-  <button onClick={() => setPage((p) => p + 1)}>
+  <button onClick={() => setPage((p) => p + 1)} 
+     disabled={page >= totalPages}
+    >
     Next
   </button>
 </div>
@@ -73,8 +79,8 @@ export default function FetchProduct() {
             <h3>{product.title}</h3>
             <p>{product.price}</p>
             
-            <DeleteProduct id={product.id} search={search}/>
-            <UpdateProduct id={product.id} search={search}/>
+            <DeleteProduct id={product.id} search={search} page={page}/>
+            <UpdateProduct id={product.id} search={search} page={page} />
         </div>)
     }
 

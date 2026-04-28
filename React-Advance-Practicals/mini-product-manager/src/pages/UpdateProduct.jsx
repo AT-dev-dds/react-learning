@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProduct } from "../services/productServices.js";
 import { useState } from "react"; 
 
-export default function UpdateProduct({ id,search }) {
+export default function UpdateProduct({ id,search,page }) {
   const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
@@ -29,13 +29,13 @@ export default function UpdateProduct({ id,search }) {
     });
   };
 
-  
+
 
   const mutation = useMutation({
   mutationFn: updateProduct,
 
   onSuccess: (newData, { id }) => {
-    queryClient.setQueryData(["products", search], (oldData) => {
+    queryClient.setQueryData(["products", search,page], (oldData) => {
       if (!oldData?.products) return oldData;
 
       const updatedProduct = oldData.products.map((product) =>
