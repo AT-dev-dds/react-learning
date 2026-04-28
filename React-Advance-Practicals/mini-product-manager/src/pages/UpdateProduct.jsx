@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProduct } from "../services/productServices.js";
 import { useState } from "react"; 
 
-export default function UpdateProduct({ id,search,page }) {
+export default function UpdateProduct({ id,debouncedSearch,page }) {
   const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
@@ -34,26 +34,46 @@ export default function UpdateProduct({ id,search,page }) {
   const mutation = useMutation({
   mutationFn: updateProduct,
 
-  onSuccess: (newData, { id }) => {
-    queryClient.setQueryData(["products", search,page], (oldData) => {
-      if (!oldData?.products) return oldData;
+  onMutate:async(newData,{id})=>{
+   
+    //Step 1: stop refetch
 
-      const updatedProduct = oldData.products.map((product) =>
-        product.id === id ? newData : product
-      );
+    await queryClient.cancelQueries(["products",debouncedSearch,page]);
 
+    //Step 2:snapshot Previous data
+
+    const previousUpdate= queryClient.getQueryData(["products",debouncedSearch,page]);
+
+    // Step 3: Optimistic update
+
+    queryClient.setQueryData(["products",debouncedSearch,page],(oldData)=>{
+
+      if(!oldData?.products) return oldData;
+      
       return {
-        ...oldData,
-        products: updatedProduct,
-      };
+       ...oldData,
+      products:oldData.products.map((p)=>
+        p.id===id?{...p, ...newData}:p
+      
+    ),
+      }
+      
     });
 
-    setShowForm(false);
+
+    //Step 4: Return snapshot
+    return {previousUpdate};
   },
 
-  onError: (error) => {
-    console.log("Updation Error", error);
+  onError:(error,id,context)=>{
+    queryClient.setQueryData(["products",debouncedSearch,page],context.previousUpdate);
+    console.log(error)
   },
+
+onSuccess:()=>{
+//  queryClient.invalidateQueries({ queryKey: ["products"] });
+   setShowForm(false);
+}
 });
 
   return (

@@ -8,22 +8,39 @@ export default function DeleteProduct({id,search,page}) {
   const mutation = useMutation({
     mutationFn: deleteProducts,
 
-   onSuccess: (_, deletedId) => {
-      queryClient.setQueryData(["products", search,page], (oldData) => {
-        if (!oldData?.products) return oldData;
+    onMutate:async(id)=>{
+      
+      // 1. Clear Refetch
+      await queryClient.cancelQueries(["products",search,page]);
 
-        return {
-          ...oldData,
-          products: oldData.products.filter(
-            (product) => product.id !== deletedId
-          ),
-        };
-      });
+      // 2. snapshot old data 
+      const previousData= queryClient.getQueryData(["products",search,page]);
+
+      //3. optimistic update (remove instantly)
+         queryClient.setQueryData(["products",search,page],(oldData)=>{
+          if(!oldData) return oldData;
+          return {
+            ...oldData,
+            products: oldData?.products.filter((product)=>product.id!==id)
+          }
+         });
+
+      // 4. return snapshot for rollback 
+      return {previousData}
     },
 
-    onError: (error) => {
-      console.log("Delete Error:", error);
+    onError:(error,id,context)=>{
+   //rollback if any error 
+
+   queryClient.setQueryData(["products",search,page],context.previousData);
+
+   console.log(error);
     },
+
+    onSuccess:()=>{
+      queryClient.invalidateQueries(["products"])
+    }
+
   });
 
   return (

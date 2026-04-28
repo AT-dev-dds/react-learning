@@ -32,7 +32,7 @@ export default function FetchProduct() {
         staleTime:5000,
         refetchOnWindowFocus:false
     });
-
+ console.log("DATA FROM QUERY:", data);
     const handleChange=(e)=>{
       setSearch(e.target.value);
     }
@@ -80,7 +80,7 @@ export default function FetchProduct() {
             <p>{product.price}</p>
             
             <DeleteProduct id={product.id} search={search} page={page}/>
-            <UpdateProduct id={product.id} search={search} page={page} />
+            <UpdateProduct id={product.id} debouncedSearch={debouncedSearch} page={page} />
         </div>)
     }
 
