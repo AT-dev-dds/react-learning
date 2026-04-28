@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {useNavigate} from 'react-router'
 import {useQuery} from '@tanstack/react-query'
 import {getProducts} from '../services/productServices.js'
@@ -8,11 +8,19 @@ import UpdateProduct from './UpdateProduct.jsx';
 export default function FetchProduct() {
 
   const [search,setSearch]=useState("");
+  const [debouncedSearch,setDebouncedSearch]=useState("");
 
+  useEffect(()=>{
+    const timer=setTimeout(()=>{
+      setDebouncedSearch(search);
+    },500);
+
+    return ()=> clearTimeout(timer);
+  },[search])
     
     const {data,isLoading,error,isError}=useQuery({
-        queryKey:["products",search],
-        queryFn:()=> getProducts({search}),
+        queryKey:["products",debouncedSearch],
+        queryFn:()=> getProducts({search: debouncedSearch}),
         staleTime:5000,
         refetchOnWindowFocus:false
     });

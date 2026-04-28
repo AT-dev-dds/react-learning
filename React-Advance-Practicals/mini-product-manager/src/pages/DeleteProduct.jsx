@@ -2,7 +2,7 @@ import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProducts } from "../services/productServices.js";
 
-export default function DeleteProduct({ id }) {
+export default function DeleteProduct(id) {
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
