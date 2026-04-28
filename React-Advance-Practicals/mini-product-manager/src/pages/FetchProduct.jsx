@@ -34,7 +34,7 @@ export default function FetchProduct() {
 
     if(isLoading) return <h4>Loading...</h4>
 
-    if(isError) return <h5>Error in fetching products!</h5>;
+    if(isError) return <h5>Error in fetching products!</h5>
 
   return (
     <>
