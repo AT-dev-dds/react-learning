@@ -6,7 +6,7 @@ import { deleteProducts } from "../services/productServices.js";
   const queryClient = useQueryClient();
 
   useEffect(() => {
-  console.log("DeleteProduct rendered");
+  console.log(`DeleteProduct ${id} rendered`,{search,page});
 });
 
   const mutation = useMutation({

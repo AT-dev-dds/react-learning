@@ -1,4 +1,49 @@
-import React, { useState,useMemo } from "react";
+
+// import React, { useState } from "react";
+// import { useCallback } from "react";
+
+// function App() {
+//   const [count, setCount] = useState(0);
+
+//   const handleClick = useCallback(() => {
+//     console.log("Clicked");
+//   },[]);
+
+//   return (
+//     <div>
+//       <h1>{count}</h1>
+
+//       <button onClick={() => setCount(count + 1)}>
+//         Increase
+//       </button>
+
+//       <Child onClick={handleClick} />
+//     </div>
+//   );
+// }
+
+// const Child = React.memo(function Child({ onClick }) {
+//   console.log("Child rendered");
+
+//   return <button onClick={onClick}>Click Me</button>;
+// });
+
+// export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import React, { useState,useMemo,useCallback } from "react";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -26,22 +71,35 @@ function App() {
 
 function ProductList({ products }) {
   console.log("ProductList rendered");
+   const handleClick = useCallback((id)=>{
+   
+    console.log("Clicked:", id);
+
+   },[]);
 
   return (
     <div>
       {products.map((p) => (
-        <ProductCard key={p.id} product={p} />
+        <ProductCard key={p.id} product={p} onClick={handleClick} />
       ))}
     </div>
   );
 }
 
 const ProductCard= React.memo(
-  function ProductCard({ product }) {
+  function ProductCard({ product,onClick }) {
   console.log("ProductCard rendered:", product.id);
 
-  return <div>{product.name}</div>;
+  return <div onClick={()=>onClick(product.id)}>{product.name}</div>;
 }
 )
 
 export default App;
+
+
+
+
+
+
+
+

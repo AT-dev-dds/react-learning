@@ -14,7 +14,7 @@ function UpdateProduct({ id,debouncedSearch,page }) {
   const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
-  console.log("Rendered:");
+  console.log("Update Rendered:");
 });
 
   const handleChange = (e) => {
