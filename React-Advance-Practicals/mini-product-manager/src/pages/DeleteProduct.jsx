@@ -1,9 +1,13 @@
-import React from "react";
+import React,{useEffect} from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteProducts } from "../services/productServices.js";
 
-export default function DeleteProduct({id,search,page}) {
+ function DeleteProduct({id,search,page}) {
   const queryClient = useQueryClient();
+
+  useEffect(() => {
+  console.log("DeleteProduct rendered");
+});
 
   const mutation = useMutation({
     mutationFn: deleteProducts,
@@ -56,3 +60,6 @@ export default function DeleteProduct({id,search,page}) {
     </>
   );
 }
+
+
+export default React.memo(DeleteProduct)

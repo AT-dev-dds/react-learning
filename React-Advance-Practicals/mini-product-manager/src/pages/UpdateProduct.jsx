@@ -1,9 +1,9 @@
 import React from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProduct } from "../services/productServices.js";
-import { useState } from "react"; 
+import { useState,useEffect } from "react"; 
 
-export default function UpdateProduct({ id,debouncedSearch,page }) {
+function UpdateProduct({ id,debouncedSearch,page }) {
   const queryClient = useQueryClient();
 
   const [formData, setFormData] = useState({
@@ -12,6 +12,10 @@ export default function UpdateProduct({ id,debouncedSearch,page }) {
   });
 
   const [showForm, setShowForm] = useState(false);
+
+  useEffect(() => {
+  console.log("Rendered:");
+});
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -111,3 +115,6 @@ onSuccess:()=>{
     </>
   );
 }
+
+
+export default React.memo(UpdateProduct);
