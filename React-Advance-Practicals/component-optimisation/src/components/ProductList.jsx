@@ -1,6 +1,7 @@
 import React from "react";
 import { products } from "../../data.js";
 
+
 const ProductList = React.memo(({ search }) => {
   console.log("ProductList rendered");
 
